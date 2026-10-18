@@ -42,7 +42,7 @@ export function Register() {
             Зареєструйтесь заздалегідь — нам важливо врахувати всіх
           </h2>
           <p className="break-words text-pretty leading-relaxed">
-            Заповніть коротку форму. Поки це демонстраційний режим — після підключення скриптів заявки будуть приходити на пошту та в Google Таблиці.
+            Заповніть коротку форму.
           </p>
           <div className="mt-auto rounded-2xl border border-accent-foreground/20 p-5 text-sm leading-relaxed">
             <strong>Потрібна допомога?</strong>
@@ -60,17 +60,13 @@ export function Register() {
             <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
               <CheckCircle2 className="mb-5 size-16 text-primary" aria-hidden="true" />
               <h3 className="text-2xl font-semibold">Дякуємо за заявку!</h3>
-              <p className="mt-3 max-w-sm text-muted-foreground">Це демонстраційне підтвердження. Після підключення інтеграцій ми надішлемо дані на пошту та збережемо їх у таблиці.</p>
-              <button type="button" onClick={() => { setSubmitted(false); setForm(initialForm) }} className="mt-7 rounded-full border border-border px-5 py-2.5 text-sm font-semibold transition-colors hover:bg-secondary">
-                Подати ще одну заявку
-              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div className="mb-2">
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">{event.date} · {event.time}</p>
                 <h3 className="mt-2 text-2xl font-semibold">Заявка на участь</h3>
-                <p className="mt-1 text-sm text-muted-foreground">Залиште контакти — ми підтвердимо реєстрацію.</p>
+                
               </div>
               <label className="grid min-w-0 gap-2 text-sm font-medium">Імʼя батьків
                 <input required value={form.name} onChange={(e) => updateField('name', e.target.value)} className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" placeholder="Ваше імʼя" />
