@@ -7,6 +7,7 @@ import { event } from '@/lib/site-data'
 const initialForm = {
   name: '',
   phone: '',
+  email: '',
   adults: '1',
   children: '',
   block: '1',
@@ -16,18 +17,29 @@ export function Register() {
   const [form, setForm] = useState(initialForm)
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   function updateField(field: keyof typeof initialForm, value: string) {
     setForm((current) => ({ ...current, [field]: value }))
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsSubmitting(true)
-    window.setTimeout(() => {
-      setIsSubmitting(false)
+    setError(null)
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!response.ok) throw new Error(`Request failed with status ${response.status}`)
       setSubmitted(true)
-    }, 650)
+    } catch {
+      setError('Не вдалося надіслати заявку. Перевірте зʼєднання та спробуйте ще раз.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -74,6 +86,9 @@ export function Register() {
               <label className="grid min-w-0 gap-2 text-sm font-medium">Номер телефону
                 <input required type="tel" value={form.phone} onChange={(e) => updateField('phone', e.target.value)} className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" placeholder="+380 00 000 00 00" />
               </label>
+              <label className="grid min-w-0 gap-2 text-sm font-medium">E-mail
+                <input required type="email" value={form.email} onChange={(e) => updateField('email', e.target.value)} className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" placeholder="you@example.com" />
+              </label>
               <div className="grid min-w-0 gap-4 sm:grid-cols-2">
                 <label className="grid min-w-0 gap-2 text-sm font-medium">Дорослих
                   <select value={form.adults} onChange={(e) => updateField('adults', e.target.value)} className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none focus:border-primary">
@@ -95,6 +110,9 @@ export function Register() {
                 {isSubmitting && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
                 {isSubmitting ? 'Надсилаємо…' : 'Зареєструватися'}
               </button>
+              {error && (
+                <p role="alert" className="text-center text-sm font-medium text-destructive">{error}</p>
+              )}
               <p className="text-center text-xs leading-relaxed text-muted-foreground">Натискаючи кнопку, ви погоджуєтесь на обробку контактних даних для організації події.</p>
             </form>
           )}

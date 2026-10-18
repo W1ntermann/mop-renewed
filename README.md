@@ -30,6 +30,24 @@ pnpm dev       # девсервер → http://localhost:3000
 | `pnpm build`    | Продакшн-збірка                             |
 | `pnpm start`    | Запуск продакшн-сервера                     |
 | `pnpm favicons` | Генерація фавіконів з `public/icon-512.png` |
+| `pnpm sheet:setup` | Створення заголовка (базових колонок) у Google Таблиці реєстрацій |
+| `pnpm notify:test` | Тестовий лист сповіщення через Resend |
+
+## Реєстрація та сповіщення
+
+Форма на `/register` надсилає заявку в `POST /api/register`, який:
+
+1. валідує дані (`lib/registration.ts`);
+2. додає рядок у Google Таблицю (`lib/sheets.ts`) — колонки: *Дата реєстрації, Імʼя, Телефон, Email, Дорослих, Дітей та вік, Блок участі, Статус, Джерело*;
+3. надсилає два листи через Resend (`lib/notify.ts`): підтвердження учаснику та сповіщення організатору.
+
+### Налаштування
+
+1. Скопіюйте `.env.example` → `.env` і заповніть змінні.
+2. **Google Sheets:** створіть [service account](https://console.cloud.google.com/) у Google Cloud Console, увімкніть *Google Sheets API*, завантажте JSON-ключ; створіть таблицю і надайте service account-пошті роль *Редактор*; впишіть `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY` (допустимі `\n`) та `GOOGLE_SHEET_ID` (з URL таблиці).
+3. Запустіть `pnpm sheet:setup` — створить закріплений заголовок із базовими колонками.
+4. **Resend:** візьміть API-ключ; для продакшену верифікуйте домен і вкажіть `RESEND_FROM` (у тестовому режимі листи йдуть лише на вашу пошту Resend).
+5. Перевірте канал: `pnpm notify:test`.
 
 ## Структура проєкту
 
