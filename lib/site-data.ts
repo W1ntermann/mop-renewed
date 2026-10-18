@@ -4,11 +4,11 @@ export const event = {
   dateShort: '24.05',
   time: '11:00 – 19:00',
   city: 'Одеса',
-  address: 'вул. Маразліївська, 1Е',
+  address: 'вул. Маразліївська, 1Є',
   venue: 'Зелений театр',
   phones: [
     { label: '+38 (067) 484-50-51', href: 'tel:+380674845051' },
-    { label: '+38 (098) 227-51-07', href: 'tel:+380982275107' },
+    { label: '+38 (073) 791-29-34', href: 'tel:+380737912934' },
   ],
   email: 'osoblyva.planeta@gmail.com',
 }
