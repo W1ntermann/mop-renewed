@@ -33,6 +33,7 @@ export const socials = [
   { href: 'https://www.facebook.com/groups/1253583618559624/', label: 'Facebook' },
 ]
 
+
 export const lectures = [
   {
     time: '11:30',
