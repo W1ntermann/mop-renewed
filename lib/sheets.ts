@@ -40,7 +40,7 @@ export async function appendRegistration(row: SheetRow): Promise<void> {
   await sheets.spreadsheets.values.append({
     spreadsheetId,
     range: 'A1',
-    valueInputOption: 'USER_ENTERED',
+    valueInputOption: 'RAW',
     insertDataOption: 'INSERT_ROWS',
     requestBody: { values: [row] },
   })
