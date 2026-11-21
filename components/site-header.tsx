@@ -47,6 +47,12 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <Link
+            href="/gifts"
+            className="hidden rounded-full border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary sm:inline-flex"
+          >
+            Подарунки
+          </Link>
+          <Link
             href="/register"
             className="hidden rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:inline-flex"
           >
