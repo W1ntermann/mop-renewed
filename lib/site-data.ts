@@ -19,6 +19,7 @@ export const navLinks = [
   { href: '/', label: 'Головна' },
   { href: '/program', label: 'Програма' },
   { href: '/register', label: 'Реєстрація' },
+  { href: '/gifts', label: 'Подарунки' },
 ]
 
 export const donate = {

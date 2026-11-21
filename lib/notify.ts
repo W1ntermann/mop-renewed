@@ -1,6 +1,12 @@
 import { Resend } from 'resend'
 import type { Registration } from '@/lib/registration'
-import { organizerNotificationMail, participantConfirmationMail } from '@/lib/mail-templates'
+import type { GiftRegistration } from '@/lib/gifts'
+import {
+  organizerNotificationMail,
+  participantConfirmationMail,
+  giftOrganizerNotificationMail,
+  giftParticipantConfirmationMail,
+} from '@/lib/mail-templates'
 import { event } from '@/lib/site-data'
 
 function getResend(): Resend | null {
@@ -38,6 +44,43 @@ export async function sendRegistrationEmails(
 
   if (participant.error) console.error('[notify] Помилка листа учаснику:', participant.error)
   if (organizer.error) console.error('[notify] Помилка листа організатору:', organizer.error)
+
+  return { participant: !participant.error, organizer: !organizer.error }
+}
+
+/**
+ * Надсилає два листи для заявки на подарунок: підтвердження батькам та сповіщення організаторам.
+ * Якщо Resend не налаштовано — листи пропускаються без помилки.
+ */
+export async function sendGiftEmails(
+  registration: GiftRegistration,
+  registeredAt: Date,
+): Promise<NotifyResult> {
+  const resend = getResend()
+
+  if (!resend) {
+    console.warn('[notify] RESEND_API_KEY не задано — листи не надіслано.')
+    return { participant: false, organizer: false }
+  }
+
+  const from = process.env.RESEND_FROM ?? 'Моя особлива планета <onboarding@resend.dev>'
+  const organizerTo = process.env.NOTIFY_EMAIL ?? event.email
+
+  const [participant, organizer] = await Promise.all([
+    resend.emails.send({
+      from,
+      to: registration.email,
+      ...giftParticipantConfirmationMail(registration),
+    }),
+    resend.emails.send({
+      from,
+      to: organizerTo,
+      ...giftOrganizerNotificationMail(registration, registeredAt),
+    }),
+  ])
+
+  if (participant.error) console.error('[notify] Помилка листа учаснику (подарунки):', participant.error)
+  if (organizer.error) console.error('[notify] Помилка листа організатору (подарунки):', organizer.error)
 
   return { participant: !participant.error, organizer: !organizer.error }
 }

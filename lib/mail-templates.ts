@@ -1,4 +1,5 @@
 import type { Registration } from '@/lib/registration'
+import type { GiftRegistration } from '@/lib/gifts'
 import { blockLabel } from '@/lib/registration'
 import { event } from '@/lib/site-data'
 
@@ -59,6 +60,65 @@ export function participantConfirmationMail(registration: Registration): Mail {
         ['Дітей та їх вік', registration.children || '—'],
       ])}
       <p style="margin:0;font-size:14px;line-height:1.6;">Реєстрація допомагає нам підготувати достатню кількість матеріалів і подарунків для кожної дитини. До зустрічі! 💛</p>
+      `,
+    ),
+  }
+}
+
+export function giftParticipantConfirmationMail(
+  registration: GiftRegistration,
+): Mail {
+  return {
+    subject: `Ваша заявка на подарунок від фонду «${event.name}» прийнята`,
+    html: layout(
+      `Дякуємо, ${registration.parentName}! Вашу заявку на святкову роздачу подарунків прийнято.`,
+      `\n
+      <p style="margin:0 0 16px;font-size:14px;line-height:1.6;">Ми отримали вашу заявку. Найближчим часом наші волонтери зв'яжуться з вами за вказаним номером телефону для уточнення деталей де і коли можна забрати подарунок.</p>
+      ${detailsTable([
+        ['Ім\'я батька / представника', registration.parentName],
+        ['Телефон', registration.phone],
+        ['E-mail', registration.email],
+        ["Ім'я дитини", registration.childName],
+        ['Дата народження / вік', registration.childDobOrAge],
+        ['Категорія родини', registration.familyCategory || '—'],
+      ])}
+      <p style="margin:0;font-size:14px;line-height:1.6;">Нехай Різдво принесе світло та радість у ваш дім! 💛</p>
+      <p style="margin:8px 0 0;font-size:14px;line-height:1.6;">З теплом, команда фонду «Моя особлива планета»</p>
+      `,
+    ),
+  }
+}
+
+export function giftOrganizerNotificationMail(
+  registration: GiftRegistration,
+  registeredAt: Date,
+): Mail {
+  const date = registeredAt.toLocaleString('uk-UA', {
+    timeZone: 'Europe/Kyiv',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+
+  return {
+    subject: `Нова заявка на подарунок: ${registration.childName} (${registration.parentName})`,
+    html: layout(
+      'Нова заявка на святкову роздачу подарунків',
+      `\n
+      <p style="margin:0 0 16px;font-size:14px;line-height:1.6;">Хтось щойно зареєструвався на святкову роздачу подарунків. Дані заявки:</p>
+      ${detailsTable([
+        ['Час заявки', date],
+        ['ПІБ батька / представника', registration.parentName],
+        ['Телефон', registration.phone],
+        ['E-mail', registration.email],
+        ["Ім'я дитини", registration.childName],
+        ['Дата народження / вік', registration.childDobOrAge],
+        ['Категорія родини', registration.familyCategory || '—'],
+        ['Згода на ПД', registration.consent ? 'Так' : 'Ні'],
+      ])}
+      <p style="margin:0;font-size:13px;color:#8a8fa3;">Заявка також збережена у Google Таблиці (аркуш «Подарунки»).</p>
       `,
     ),
   }

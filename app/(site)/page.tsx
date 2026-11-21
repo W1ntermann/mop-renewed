@@ -43,6 +43,33 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <section className="px-4 pb-20 md:px-6 md:pb-28">
+        <div className="mx-auto grid max-w-6xl gap-6 overflow-hidden rounded-[1.5rem] bg-accent p-4 text-accent-foreground shadow-xl shadow-accent/20 sm:gap-10 sm:rounded-[2rem] sm:p-10 lg:grid-cols-2 lg:p-14">
+          <div className="flex min-w-0 flex-col gap-4">
+            <h2 className="max-w-xl break-words text-pretty text-[clamp(1.55rem,7.5vw,2.25rem)] font-semibold leading-[1.12] md:text-4xl">
+              Різдво — час чудес, тепла та щирих усмішок
+            </h2>
+            <p className="break-words text-pretty leading-relaxed">
+              Благодійний фонд «Моя особлива планета» відкриває реєстрацію на святкову роздачу подарунків
+              для дітей. Ми хочемо підтримати родини та подарувати кожній особливой дитині трохи казки й
+              віри у добро.
+            </p>
+            <p className="break-words text-pretty leading-relaxed">
+              Будь ласка, заповніть форму, щоб зареєструвати вашу дитину.
+            </p>
+          </div>
+          <div className="min-w-0 flex flex-col items-center justify-center">
+            <Link
+              href="/gifts"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Зареєструватися на свято
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   )
 }
