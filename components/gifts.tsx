@@ -98,7 +98,7 @@ export function Gifts() {
                   value={form.parentName}
                   onChange={(e) => updateField('parentName', e.target.value)}
                   className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                  placeholder="Іван Іванов Іванов"
+                  placeholder="Іван Іванович Іванов"
                 />
               </label>
 
