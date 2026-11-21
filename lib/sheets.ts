@@ -70,7 +70,7 @@ export async function appendGiftRegistration(row: GiftSheetRow): Promise<void> {
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: 'Подарунки!A1',
+    range: 'A1',
     valueInputOption: 'RAW',
     insertDataOption: 'INSERT_ROWS',
     requestBody: { values: [row] },
