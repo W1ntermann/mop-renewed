@@ -19,7 +19,7 @@ export function Gifts() {
     childName: '',
     childDobOrAge: '',
     familyCategory: '',
-    pickupLocation: 'Парк Шевченка біля входу у Зелений театр (Марцілієвська 1Є)',
+    pickupLocation: 'Парк Шевченка біля входу у Зелений театр (Маразлієвська 1є)',
     pickupDate: '',
     pickupTime: '',
     consent: false,
@@ -177,7 +177,7 @@ export function Gifts() {
                   value={form.pickupLocation}
                   onChange={(e) => updateField('pickupLocation', e.target.value)}
                   className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                  placeholder="Парк Шевченка біля входу у зелений театр"
+                  placeholder="Парк Шевченка біля входу у зелений театр (Маразлієвська 1є)"
                 />
               </label>
 
