@@ -5,6 +5,9 @@ export type GiftRegistration = {
   childName: string
   childDobOrAge: string
   familyCategory: string
+  pickupLocation: string
+  pickupDate: string
+  pickupTime: string
   consent: string
 }
 
@@ -43,6 +46,9 @@ export function parseGiftRegistration(body: unknown): GiftParseResult {
     childName: asString(raw.childName),
     childDobOrAge: asString(raw.childDobOrAge),
     familyCategory: asString(raw.familyCategory),
+    pickupLocation: asString(raw.pickupLocation),
+    pickupDate: asString(raw.pickupDate),
+    pickupTime: asString(raw.pickupTime),
     consent: asString(raw.consent),
   }
 
@@ -57,6 +63,10 @@ export function parseGiftRegistration(body: unknown): GiftParseResult {
   if (data.familyCategory && !(data.familyCategory in familyCategoryLabels)) {
     errors.familyCategory = 'Оберіть категорію родини.'
   }
+  if (!data.pickupLocation)
+    errors.pickupLocation = 'Вкажіть місце отримання подарунка.'
+  if (!data.pickupDate) errors.pickupDate = 'Оберіть дату отримання подарунка.'
+  if (!data.pickupTime) errors.pickupTime = 'Оберіть час отримання подарунка.'
   if (data.consent !== 'on') {
     errors.consent = 'Необхідно надати згоду на обробку персональних даних.'
   }

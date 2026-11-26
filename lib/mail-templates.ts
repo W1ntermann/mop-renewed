@@ -81,6 +81,9 @@ export function giftParticipantConfirmationMail(
         ["Ім'я дитини", registration.childName],
         ['Дата народження / вік', registration.childDobOrAge],
         ['Категорія родини', registration.familyCategory || '—'],
+        ['Місце', registration.pickupLocation],
+        ['Дата', registration.pickupDate],
+        ['Час', registration.pickupTime],
       ])}
       <p style="margin:0;font-size:14px;line-height:1.6;">Нехай Різдво принесе світло та радість у ваш дім! 💛</p>
       <p style="margin:8px 0 0;font-size:14px;line-height:1.6;">З теплом, команда фонду «Моя особлива планета»</p>
@@ -116,6 +119,9 @@ export function giftOrganizerNotificationMail(
         ["Ім'я дитини", registration.childName],
         ['Дата народження / вік', registration.childDobOrAge],
         ['Категорія родини', registration.familyCategory || '—'],
+        ['Місце', registration.pickupLocation],
+        ['Дата', registration.pickupDate],
+        ['Час', registration.pickupTime],
         ['Згода на ПД', registration.consent ? 'Так' : 'Ні'],
       ])}
       <p style="margin:0;font-size:13px;color:#8a8fa3;">Заявка також збережена у Google Таблиці (аркуш «Подарунки»).</p>

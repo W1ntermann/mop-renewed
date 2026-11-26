@@ -19,6 +19,9 @@ export function Gifts() {
     childName: '',
     childDobOrAge: '',
     familyCategory: '',
+    pickupLocation: 'Парк Шевченка біля входу у Зелений театр (Марцілієвська 1Є)',
+    pickupDate: '',
+    pickupTime: '',
     consent: false,
   })
   const [submitted, setSubmitted] = useState(false)
@@ -164,6 +167,45 @@ export function Gifts() {
                       {option.label}
                     </option>
                   ))}
+                </select>
+              </label>
+
+              <label className="grid min-w-0 gap-2 text-sm font-medium">
+                Місце отримання подарунка
+                <input
+                  required
+                  value={form.pickupLocation}
+                  onChange={(e) => updateField('pickupLocation', e.target.value)}
+                  className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  placeholder="Парк Шевченка біля входу у зелений театр"
+                />
+              </label>
+
+              <label className="grid min-w-0 gap-2 text-sm font-medium">
+                Дата отримання подарунка
+                <select
+                  required
+                  value={form.pickupDate}
+                  onChange={(e) => updateField('pickupDate', e.target.value)}
+                  className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none focus:border-primary"
+                >
+                  <option value="">Оберіть дату</option>
+                  <option value="19.12.2026">19 грудня 2026</option>
+                  <option value="23.12.2026">23 грудня 2026</option>
+                </select>
+              </label>
+
+              <label className="grid min-w-0 gap-2 text-sm font-medium">
+                Час отримання подарунка
+                <select
+                  required
+                  value={form.pickupTime}
+                  onChange={(e) => updateField('pickupTime', e.target.value)}
+                  className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none focus:border-primary"
+                >
+                  <option value="">Оберіть час</option>
+                  <option value="12:00–13:00">12:00–13:00</option>
+                  <option value="14:30–15:30">14:30–15:30</option>
                 </select>
               </label>
 
