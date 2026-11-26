@@ -182,31 +182,28 @@ export function Gifts() {
               </label>
 
               <label className="grid min-w-0 gap-2 text-sm font-medium">
-                Дата отримання подарунка
+                Слот отримання подарунка (дата та час)
                 <select
                   required
-                  value={form.pickupDate}
-                  onChange={(e) => updateField('pickupDate', e.target.value)}
+                  value={form.pickupDate && form.pickupTime ? `${form.pickupDate}|${form.pickupTime}` : ''}
+                  onChange={(e) => {
+                    const [pickupDate, pickupTime] = e.target.value.split('|')
+                    updateField('pickupDate', pickupDate)
+                    updateField('pickupTime', pickupTime)
+                  }}
                   className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none focus:border-primary"
                 >
-                  <option value="">Оберіть дату</option>
-                  <option value="19.12.2026">19 грудня 2026</option>
-                  <option value="23.12.2026">23 грудня 2026</option>
+                  <option value="">Оберіть слот отримання подарунка</option>
+                  <option value="19.12.2026|15:00–15:30">
+                    19 грудня 2026, 15:00–15:30
+                  </option>
+                  <option value="23.12.2026|12:00–13:00">
+                    23 грудня 2026, 12:00–13:00
+                  </option>
                 </select>
-              </label>
-
-              <label className="grid min-w-0 gap-2 text-sm font-medium">
-                Час отримання подарунка
-                <select
-                  required
-                  value={form.pickupTime}
-                  onChange={(e) => updateField('pickupTime', e.target.value)}
-                  className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none focus:border-primary"
-                >
-                  <option value="">Оберіть час</option>
-                  <option value="12:00–13:00">12:00–13:00</option>
-                  <option value="14:30–15:30">14:30–15:30</option>
-                </select>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Доступні два фіксованих слоти отримання подарунків.
+                </p>
               </label>
 
               <label className="flex items-start gap-2 text-sm font-medium">

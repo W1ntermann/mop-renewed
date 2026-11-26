@@ -67,6 +67,17 @@ export function parseGiftRegistration(body: unknown): GiftParseResult {
     errors.pickupLocation = 'Вкажіть місце отримання подарунка.'
   if (!data.pickupDate) errors.pickupDate = 'Оберіть дату отримання подарунка.'
   if (!data.pickupTime) errors.pickupTime = 'Оберіть час отримання подарунка.'
+  if (data.pickupDate && data.pickupTime) {
+    const ALLOWED_SLOTS: Record<string, string> = {
+      '19.12.2026': '15:00–15:30',
+      '23.12.2026': '12:00–13:00',
+    }
+    const allowedTime = ALLOWED_SLOTS[data.pickupDate]
+    if (!allowedTime || allowedTime !== data.pickupTime) {
+      errors.pickupDate = 'Оберіть один з доступних слотів отримання подарунка.'
+      errors.pickupTime = 'Оберіть один з доступних слотів отримання подарунка.'
+    }
+  }
   if (data.consent !== 'on') {
     errors.consent = 'Необхідно надати згоду на обробку персональних даних.'
   }
