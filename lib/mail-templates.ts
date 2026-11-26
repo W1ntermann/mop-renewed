@@ -73,8 +73,6 @@ export function giftParticipantConfirmationMail(
     html: layout(
       `Дякуємо, ${registration.parentName}! Вашу заявку на святкову роздачу подарунків прийнято.`,
       `\n
-      <p style="margin:0 0 16px;font-size:14px;line-height:1.6;">Ми отримали вашу заявку. Найближчим часом наші волонтери зв'яжуться з вами за вказаним номером телефону для уточнення деталей де і коли можна забрати подарунок.</p>
-      ${detailsTable([
         ['Ім\'я батька / представника', registration.parentName],
         ['Телефон', registration.phone],
         ['E-mail', registration.email],
