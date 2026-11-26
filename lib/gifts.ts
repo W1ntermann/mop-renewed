@@ -69,7 +69,7 @@ export function parseGiftRegistration(body: unknown): GiftParseResult {
   if (!data.pickupTime) errors.pickupTime = 'Оберіть час отримання подарунка.'
   if (data.pickupDate && data.pickupTime) {
     const ALLOWED_SLOTS: Record<string, string> = {
-      '19.12.2026': '15:00–15:30',
+      '19.12.2026': '14:30–15:30',
       '23.12.2026': '12:00–13:00',
     }
     const allowedTime = ALLOWED_SLOTS[data.pickupDate]
