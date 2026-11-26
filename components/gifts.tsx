@@ -194,7 +194,7 @@ export function Gifts() {
                   className="h-12 w-full min-w-0 rounded-xl border border-border bg-background px-4 outline-none focus:border-primary"
                 >
                   <option value="">Оберіть слот отримання подарунка</option>
-                  <option value="19.12.2026|15:00–15:30">
+                  <option value="19.12.2026|14:30–15:30">
                     19 грудня 2026, 15:00–15:30
                   </option>
                   <option value="23.12.2026|12:00–13:00">
